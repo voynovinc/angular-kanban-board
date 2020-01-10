@@ -37,7 +37,7 @@ const components = [ShellComponent];
 
 @NgModule({
   declarations: [...components],
-  imports: [...modules, ...components],
+  imports: [...modules],
   exports: [...modules, ...components]
 })
 export class SharedModule {}
