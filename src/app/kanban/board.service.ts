@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import * as firebase from "firebase/app";
-import { Board, Task } from "./board.model";
 import { switchMap, map } from "rxjs/operators";
+import { Board, Task } from "./board.model";
 
 @Injectable({
   providedIn: "root"
@@ -12,10 +12,7 @@ export class BoardService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
 
   /**
-   * Create a new board in Firestore database based
-   * for the current user.
-   *
-   * @param data Board data based on `board.model`
+   * Creates a new board for the current user
    */
   async createBoard(data: Board) {
     const user = await this.afAuth.auth.currentUser;
@@ -27,9 +24,7 @@ export class BoardService {
   }
 
   /**
-   * Delete a specific board for this user.
-   *
-   * @param boardId id of the board to delete
+   * Delete board
    */
   deleteBoard(boardId: string) {
     return this.db
@@ -39,24 +34,17 @@ export class BoardService {
   }
 
   /**
-   * Update the tasks on a given board after
-   * changes have been made.
-   *
-   * @param boardId id of the board to update
-   * @param tasks list of tasks associated with the board of type `Task`
+   * Updates the tasks on board
    */
   updateTasks(boardId: string, tasks: Task[]) {
     return this.db
       .collection("boards")
-      .doc("boardId")
+      .doc(boardId)
       .update({ tasks });
   }
 
   /**
-   * Remove a specific task from the given board.
-   *
-   * @param boardId current board id
-   * @param task task to remove
+   * Remove a specifc task from the board
    */
   removeTask(boardId: string, task: Task) {
     return this.db
@@ -69,8 +57,6 @@ export class BoardService {
 
   /**
    * Get all boards owned by current user
-   * ordered by priority and if he owns
-   * nothing, then return empty array.
    */
   getUserBoards() {
     return this.afAuth.authState.pipe(
@@ -89,15 +75,13 @@ export class BoardService {
   }
 
   /**
-   * Sort user's boards.
-   *
-   * @param boards list of boards
+   * Run a batch write to change the priority of each board for sorting
    */
   sortBoards(boards: Board[]) {
     const db = firebase.firestore();
     const batch = db.batch();
     const refs = boards.map(b => db.collection("boards").doc(b.id));
-    refs.forEach((ref, index) => batch.update(ref, { priority: index }));
+    refs.forEach((ref, idx) => batch.update(ref, { priority: idx }));
     batch.commit();
   }
 }
