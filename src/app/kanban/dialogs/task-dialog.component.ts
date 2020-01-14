@@ -1,6 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Task } from "../board.model";
+import { BoardService } from "../board.service";
 
 @Component({
   selector: "app-task-dialog",
@@ -30,6 +31,10 @@ import { Task } from "../board.model";
       <button mat-button [matDialogClose]="data" cdkFocusInitial>
         {{ data.isNew ? "Add Task" : "Update Task" }}
       </button>
+      <app-delete-button
+        (delete)="handleDelete()"
+        *ngIf="!data.isNew"
+      ></app-delete-button>
     </div>
   `,
   styleUrls: ["./task-dialog.component.scss"]
@@ -39,6 +44,12 @@ export class TaskDialogComponent {
 
   constructor(
     public dialog: MatDialogRef<TaskDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private boardService: BoardService
   ) {}
+
+  handleDelete() {
+    this.boardService.removeTask(this.data.boardId, this.data.task);
+    this.dialog.close();
+  }
 }
