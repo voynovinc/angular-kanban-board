@@ -1,27 +1,25 @@
-# FirestarterDemo
+# Angular Kanban Board
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+Portfolio project that allows users to login and create their own boards with cards to follow Agile development methodology.
 
-## Development server
+## Technologies Used
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Angular 8.x
+- Firebase
+- Angular Material
 
-## Code scaffolding
+## Notable Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+List of features that the app features.
 
-## Build
+### Drag Drop
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Drag and drop boards and cards.
 
-## Running unit tests
+### Login
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Login with Google or sign up and login with email.
 
-## Running end-to-end tests
+### Cloud Save
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Your files are saved on the cloud using Firebase Firestore.
