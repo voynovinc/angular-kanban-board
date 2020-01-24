@@ -1,71 +1,75 @@
 <!-- This is our container-->
 <mat-sidenav-container class="sidenav-container">
+  <!-- this is our side nav content that will be in our opened side-->
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
 
-    <!-- this is our side nav content that will be in our opened side-->
-    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="false">
+    <!-- our navigation items list-->
+    <mat-nav-list>
+      <a mat-list-item (click)="drawer.close()" routerLink="/">Home</a>
+      <a mat-list-item (click)="drawer.close()" routerLink="/login">Login</a>
+      <a mat-list-item (click)="drawer.close()" routerLink="/kanban"
+        >Kanban Demo</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
 
-        <mat-toolbar>Menu</mat-toolbar>
+  <!-- This is our content on the page! -->
+  <mat-sidenav-content>
+    <!-- Menu toolbar at the top of the page-->
+    <mat-toolbar>
+      <!-- Menu button -->
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <!-- Icon for the button-->
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
 
-        <!-- our navigation items list-->
-        <mat-nav-list>
-            <a mat-list-item (click)="drawer.close()" routerLink="/">Home</a>
-            <a mat-list-item (click)="drawer.close()" routerLink="/login">Login</a>
-            <a mat-list-item (click)="drawer.close()" routerLink="/kanban">Kanban Demo</a>
-            <a mat-list-item (click)="drawer.close()" routerLink="/customers">SSR Demo</a>
-        </mat-nav-list>
+      <span class="logo" routerLink="/">🔥 Angular Kanban Board</span>
+      <span class="fill-space"></span>
 
-    </mat-sidenav>
+      <div *ngIf="!(isHandset$ | async)">
+        <a mat-button routerLink="/kanban">🍱 Board</a>
+        <a mat-button routerLink="/login">🔑 Login</a>
+      </div>
 
-    <!-- This is our content on the page! -->
-    <mat-sidenav-content>
-        <!-- Menu toolbar at the top of the page-->
-        <mat-toolbar>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
 
-            <!-- Menu button -->
-            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-                *ngIf="isHandset$ | async">
-                <!-- Icon for the button-->
-                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-            </button>
+      <mat-menu #menu="matMenu">
+        <a
+          mat-menu-item
+          target="_blank"
+          href="https://github.com/voynovinc/angular-kanban-board"
+        >
+          <i>💾</i>
+          <span>Code on Github</span>
+        </a>
+        <a mat-menu-item href="https://ivanvoynov.com" target="_blank">
+          <i>🔥</i>
+          <span>Ivan Voynov</span>
+        </a>
+      </mat-menu>
+    </mat-toolbar>
 
-            <span class="logo" routerLink="/">🔥 Angular Firestarter</span>
-            <span class="fill-space"></span>
-
-            <div *ngIf="!(isHandset$ | async)">
-                <a mat-button routerLink="/kanban">🍱 Kanban Board</a>
-                <a mat-button routerLink="/customers">⚡️ SSR Demo</a>
-                <a mat-button routerLink="/login">🔑 Login</a>
-            </div>
-
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>more_vert</mat-icon>
-            </button>
-
-            <mat-menu #menu="matMenu">
-                <a mat-menu-item href="https://fireship.page.link/slack">
-                    <i>💬</i>
-                    <span>Chat on Slack</span>
-                </a>
-                <a mat-menu-item href="https://github.com/codediodeio/angular-firestarter">
-                    <i>💾</i>
-                    <span>Code on Github</span>
-                </a>
-                <a mat-menu-item href="https://fireship.io/courses/angular">
-                    <i>🔥</i>
-                    <span>Full Course on Fireship</span>
-                </a>
-
-                <a mat-menu-item href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA">
-                    <i>📺</i>
-                    <span>Watch on the YouTube</span>
-                </a>
-            </mat-menu>
-
-        </mat-toolbar>
-
-        <!-- we just include some content that will be transcluded from another component-->
-        <ng-content></ng-content>
-
-    </mat-sidenav-content>
+    <!-- we just include some content that will be transcluded from another component-->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
 </mat-sidenav-container>
