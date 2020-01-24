@@ -1,7 +1,37 @@
 <header>
-  <h1>Kanban Board</h1>
-  <p>
-    Kanban boards, lists, and cards enable you to organize and prioritize your
-    projects in a fun, flexible, and rewarding way.
-  </p>
+  <img
+    class="header--img"
+    src="/assets/kanban-board.jpg"
+    alt="Kanban Board Demo"
+  />
+
+  <div class="header">
+    <h1 class="header--title">Kanban Board</h1>
+
+    <p class="header--subtitle">
+      Kanban boards, lists, and cards enable you to organize and prioritize your
+      projects in a fun, flexible, and rewarding way.
+    </p>
+
+    <ul class="header--tags">
+      <li class="header--tag">Angular</li>
+      <li class="header--tag">Firebase</li>
+      <li class="header--tag">Auth</li>
+      <li class="header--tag">Firestore</li>
+    </ul>
+
+    <div class="header--btn-group">
+      <button
+        routerLink="/login"
+        class="btn btn-group--primary"
+        mat-raised-button
+        color="primary"
+      >
+        Register
+      </button>
+      <button routerLink="/login" class="btn btn-group--secondary" mat-button>
+        Login
+      </button>
+    </div>
+  </div>
 </header>
