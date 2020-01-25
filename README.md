@@ -1,4 +1,6 @@
-# Angular Kanban Board
+# Angular Firebase • Kanban Board
+
+![alt text](/readme_assets/kanban-demo.gif "Website demo")
 
 Portfolio project that allows users to login and create their own boards with cards to follow Agile development methodology.
 
