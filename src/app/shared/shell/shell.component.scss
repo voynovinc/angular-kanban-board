@@ -3,7 +3,7 @@
 }
 
 .logo {
-  font-size: 1.2em;
+  font-size: 120%;
   cursor: pointer;
   outline: none;
 }
@@ -42,4 +42,10 @@ i {
   width: 1.75em;
   border-radius: 50%;
   margin: 0 10px 5px;
+}
+
+@media only screen and (max-width: 800px) {
+  .logo {
+    font-size: 80%;
+  }
 }
