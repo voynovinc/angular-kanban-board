@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from "@angular/router";
-import { Observable } from "rxjs";
+import { first } from "rxjs/operators";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { SnackService } from "../services/snack.service";
 
@@ -19,7 +19,9 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
-    const user = this.afAuth.auth.currentUser;
+    //const user = this.afAuth.auth.currentUser;
+    const user = await this.afAuth.authState.pipe(first()).toPromise();
+
     const isLoggedIn = !!user;
 
     if (!isLoggedIn) {
