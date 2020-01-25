@@ -6,7 +6,7 @@
       <img src="/assets/google-logo.svg" /> Login with Google
     </button>
 
-    <button mat-raised-button class="login--guest-btn">
+    <button mat-raised-button appGuestSignin class="login--guest-btn">
       <mat-icon>person</mat-icon> Login as Guest
     </button>
 
@@ -16,9 +16,11 @@
   </div>
 
   <div *ngIf="afAuth.authState | async as user">
-    <p>
+    <p *ngIf="!user.isAnonymous">
       Logged in as <strong>{{ user.email }}</strong>
     </p>
+
+    <p *ngIf="user.isAnonymous">Logged in as a Guest</p>
 
     <button mat-stroked-button (click)="afAuth.auth.signOut()">Logout</button>
   </div>
