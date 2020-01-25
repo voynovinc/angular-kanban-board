@@ -22,6 +22,17 @@
 
     <p *ngIf="user.isAnonymous">Logged in as a Guest</p>
 
+    <button
+      class="btn--board"
+      routerLink="/kanban"
+      mat-raised-button
+      color="accent"
+    >
+      <mat-icon>dashboard</mat-icon> Go to Board
+    </button>
+
+    <br />
+
     <button mat-stroked-button (click)="afAuth.auth.signOut()">Logout</button>
   </div>
 </main>
