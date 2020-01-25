@@ -23,6 +23,14 @@
   opacity: 0.5;
 }
 
+.mat-card-header {
+  justify-content: space-between;
+}
+
+.mat-card-title {
+  margin-bottom: 15px;
+}
+
 .blue {
   background: #71deff;
   color: black;
